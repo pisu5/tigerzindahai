@@ -5,6 +5,7 @@ import firebaseApp from "../firebaseConfig"; // Import Firebase config
 import { getDatabase, ref, get } from "firebase/database";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/anejamall.jpg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -63,7 +64,7 @@ const Header = () => {
         {/* Logo */}
         <div className="flex-grow text-center md:flex md:justify-center ll">
           <img
-            src="../anejamalllogo.jpg"
+            src={logo}
             alt="Logo"
             className="h-8 md:h-20 lg:h-20 mx-auto"
           />
