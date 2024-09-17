@@ -125,7 +125,7 @@ const DeliveryAddress = ({ onProceed }) => {
     try {
       console.log("Sending payload:", requestPayload);
       const response = await axios.post(
-        "http://localhost:5000/create-order",
+        "https://erhqthw5.onrender.com/create-order",
         requestPayload
       );
 

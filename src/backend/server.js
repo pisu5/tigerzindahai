@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 // Updated CORS to allow localhost during development
 app.use(
   cors({
-    origin: "https://66e8f63b5b25ea6e726b1ce7--ephemeral-conkies-b48ef7.netlify.app", // Change this to your frontend domain in production
+    origin: "https://anejamalll.netlify.app", // Change this to your frontend domain in production
   })
 );
 
