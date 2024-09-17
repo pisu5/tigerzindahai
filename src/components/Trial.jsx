@@ -5,7 +5,7 @@ import firebaseApp from "../firebaseConfig"; // Import Firebase config
 import { getDatabase, ref, get } from "firebase/database";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/anejamall.jpg";
+import logo from "../assets/anejamalllogo.jpg";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
