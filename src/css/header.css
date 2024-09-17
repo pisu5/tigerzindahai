@@ -1,0 +1,142 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.logo {
+  text-align: center; /* Center the logo */
+}
+
+.logo img {
+  height: 40px; /* Adjust height as needed */
+}
+
+.search {
+  /* Left align the search bar */
+  margin-left: 10px;
+}
+
+.search input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 250px; /* Adjust width as needed */
+}
+
+.icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cart-count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.header-bottom {
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  width: 100%;
+  justify-content: center;
+  transition: max-height 0.3s ease;
+}
+
+.header-bottom a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  position: relative;
+}
+
+.header-bottom a.sale {
+  color: red;
+}
+
+.header-bottom a:hover {
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .search {
+    display: none; /* Hide search bar on smaller screens */
+  }
+
+  .hamburger {
+    display: block; /* Display hamburger menu icon */
+    order: 1; /* Move hamburger menu to the beginning */
+    margin-left: 10px; /* Add some margin to separate from logo */
+  }
+
+  .logo {
+    order: 2; /* Move logo to the middle */
+  }
+
+  .icons {
+    order: 3; /* Move icons to the end */
+  }
+
+  .header-top {
+    flex-wrap: wrap; /* Allow items to wrap */
+  }
+
+  .header-bottom {
+    flex-direction: column; /* Stack navigation links vertically */
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .header-bottom.open {
+    max-height: 500px; /* Adjust as necessary */
+  }
+
+  .header-bottom a {
+    padding: 10px 0;
+  }
+}
+
+@media (max-width:480px) {
+  .header-top {
+    flex-direction: column; /* Stack items in header top vertically */
+    align-items: center;
+  }
+  .icons .search-icon {
+    display: none;
+  
+  }
+}
+@media (min-width: 768px) {
+  .icons .search-icon {
+    display: none;
+  }
+}
+

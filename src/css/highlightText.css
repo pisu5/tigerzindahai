@@ -1,0 +1,33 @@
+.highlighted-text {
+  display: flex;
+  align-items: center; /* Vertically center items */
+  justify-content: center; /* Horizontally center items */
+  background-color: rgb(222, 86, 86); /* Background color for the highlighted area */
+  padding: 10px;
+  position: fixed; /* Make the highlighted text fixed */
+  top: 0; /* Position at the top */
+  left: 0;
+  width: 100%; /* Full width */
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+.arrow {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.left-arrow {
+  margin-right: 10px;
+}
+
+.right-arrow {
+  margin-left: 10px;
+}
+
+.highlighted-content {
+  flex: 1;
+  color: white; /* Text color for the highlighted text */
+  font-weight: bold;
+  text-align: center; /* Center the text horizontally */
+}

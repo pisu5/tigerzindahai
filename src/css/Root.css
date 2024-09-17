@@ -1,0 +1,27 @@
+/* src/Root.css */
+.root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the header is above other content */
+    background-color: #fff; /* Adjust as needed */
+    box-shadow: 0 2px 4px rgba(74, 73, 73, 0.1); /* Optional shadow for the header */
+  }
+  
+  .highlighted-text {
+    margin-top: 60px; /* Adjust based on the height of your header */
+  }
+  
+  .content {
+    flex-grow: 1;
+    margin-top: 60px; /* Adjust based on the height of your header */
+    overflow-y: auto;
+    padding-top: 10px; /* Optional: To avoid content being hidden under header */
+  }
+  

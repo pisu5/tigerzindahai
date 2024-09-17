@@ -1,0 +1,85 @@
+/* styles.css */
+
+.our-services {
+  padding: 50px 0; /* Adjust padding as needed */
+  background-color: #f9f9f9; /* Set background color for the section */
+}
+
+.container {
+  max-width: 1200px; /* Set maximum width for the container */
+  margin: 0 auto; /* Center the container */
+  padding: 0 15px; /* Add horizontal padding */
+}
+
+.service-cards {
+  display: flex;
+  flex-direction: row; /* Set flex direction to row */
+  justify-content: space-between; /* Distribute space evenly between cards */
+  flex-wrap: nowrap; /* Prevent wrapping to the next row */
+}
+
+.service-card {
+  background-color: rgba(199, 29, 107, 255);
+  border-radius: 15px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  width: calc(33.33% - 30px); /* Adjusted to account for margin */
+  margin: 0 15px 20px; /* Added horizontal and bottom margin */
+  padding-top: 45px; /* Added top padding to make space for the cutout */
+}
+
+.cutout {
+  position: absolute;
+  top: -10px; /* Adjusted to position the cutout higher */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.cutout i {
+  font-size: 30px;
+  color: #c71d6b;
+}
+
+.service-content {
+  padding: 20px; /* Adjusted padding */
+  text-align: center;
+}
+
+h3 {
+  font-size: 20px;
+  margin-top: 20px; /* Reduced margin-top */
+  color: #333;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+}
+
+@media (max-width: 992px) {
+  .service-cards {
+    flex-wrap: wrap; /* Allow cards to wrap to the next row */
+  }
+  
+  .service-card {
+    width: calc(50% - 30px); /* Adjusted to account for margin */
+  }
+}
+
+@media (max-width: 768px) {
+  .service-card {
+    width: calc(100% - 30px); /* Adjusted to account for margin */
+    margin: 0 15px 20px; /* Added horizontal and bottom margin */
+  }
+}
