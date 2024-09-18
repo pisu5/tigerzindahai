@@ -8,7 +8,7 @@ const FAQ = () => {
     {
       question: "What is your return policy?",
       answer:
-        "You can return items within 30 days of receipt for a full refund. Please ensure items are in their original condition.",
+        "You can return items within 7 days of receipt for a full refund. Please ensure items are in their original condition.",
     },
     {
       question: "Do you offer international shipping?",

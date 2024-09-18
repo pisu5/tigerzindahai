@@ -1,12 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { ref, get, update } from "firebase/database";
+import { auth, db } from "../firebaseConfig"; // Assuming this is where your Firebase config is located
 
 const Profile = () => {
   const [userData, setUserData] = useState({
-    name: "John Doe",
-    email: "johndoe@example.com",
-    phone: "(123) 456-7890",
-    address: "1234 Main St, Apt 101",
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
   });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Listen for authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is logged in, fetch their details
+        const userRef = ref(db, `users/${user.uid}`);
+        get(userRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const userDetails = snapshot.val();
+              setUserData({
+                name: userDetails.name || user.displayName,
+                email: userDetails.email || user.email,
+                phone: userDetails.phone || "",
+                address: userDetails.address || "",
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
+      } else {
+        console.log("No user is logged in");
+        setIsLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -17,9 +54,21 @@ const Profile = () => {
   };
 
   const handleSave = () => {
-    // Logic to save changes, e.g., API call
-    console.log("User data saved:", userData);
+    if (auth.currentUser) {
+      const userRef = ref(db, `users/${auth.currentUser.uid}`);
+      update(userRef, userData)
+        .then(() => {
+          console.log("User data updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating user data:", error);
+        });
+    }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
@@ -30,25 +79,9 @@ const Profile = () => {
           <div className="relative w-24 h-24 mr-6">
             <img
               src="https://via.placeholder.com/150"
-              alt="Profile Image"
+              alt="Profile"
               className="w-full h-full rounded-full object-cover border-4 border-teal-500"
             />
-            <button className="absolute bottom-0 right-0 bg-teal-500 text-white p-2 rounded-full text-xs">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-4 h-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 12h14M12 5l7 7-7 7"
-                />
-              </svg>
-            </button>
           </div>
           {/* User Info */}
           <div>
@@ -56,10 +89,6 @@ const Profile = () => {
             <p className="text-sm text-gray-600">{userData.email}</p>
           </div>
         </div>
-        {/* Order History Button */}
-        <button className="bg-gradient-to-r from-teal-500 to-green-500 text-white px-6 py-2 rounded-full font-medium hover:scale-105 transition-transform duration-300">
-          View Order History
-        </button>
       </div>
 
       {/* Editable Information Section */}
@@ -88,7 +117,8 @@ const Profile = () => {
               id="email"
               value={userData.email}
               onChange={handleChange}
-              className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+              disabled
+              className="mt-1 block w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm bg-gray-100"
             />
           </div>
           <div>
@@ -118,11 +148,8 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Save and Cancel Buttons */}
+      {/* Save Button */}
       <div className="mt-6 flex justify-end space-x-4">
-        <button className="bg-gray-200 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-300 transition duration-200">
-          Cancel
-        </button>
         <button
           className="bg-teal-500 text-white px-6 py-2 rounded-md hover:bg-teal-600 transition duration-200"
           onClick={handleSave}

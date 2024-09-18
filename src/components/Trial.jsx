@@ -45,10 +45,11 @@ const Header = () => {
     fetchText();
   }, []);
 
- 
-
   const handleIconClick = () => {
     navigate("/profile");
+  };
+  const handleIconClick2 = () => {
+    navigate("/setting");
   };
 
   return (
@@ -127,6 +128,7 @@ const Header = () => {
             ></path>
           </svg>
           <svg
+           
             focusable="false"
             className="icon icon--header-heart text-gray-600 cursor-pointer h-8 md:h-20 lg:h-6"
             viewBox="0 0 24 24"
@@ -139,52 +141,18 @@ const Header = () => {
             ></path>
           </svg>
           <svg
-            focusable="false"
-            className="icon icon--header-truck text-gray-600 cursor-pointer h-8 md:h-20 lg:h-6"
+           onClick={handleIconClick2}
+            xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-6 h-6 text-gray-800"
           >
-            <rect
-              x="1"
-              y="10"
-              width="13"
-              height="6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-            ></rect>
-            <rect
-              x="14"
-              y="8"
-              width="8"
-              height="8"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-            ></rect>
-            <circle
-              cx="5"
-              cy="18"
-              r="2"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            ></circle>
-            <circle
-              cx="17"
-              cy="18"
-              r="2"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            ></circle>
-            <path
-              d="M1 16h21"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            ></path>
+            <path d="M12 3v3M12 18v3M4.22 4.22l2.12 2.12M16.97 16.97l2.12 2.12M3 12h3M18 12h3M4.22 19.78l2.12-2.12M16.97 7.03l2.12-2.12" />
+            <circle cx="12" cy="12" r="3" />
           </svg>
         </div>
       </div>

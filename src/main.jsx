@@ -18,6 +18,7 @@ import TermsOfService from "./components/TermOfSerVices.jsx";
 import ReturnOrder from "./components/ReturnsOrders.jsx";
 import Profile from "./components/Profile.jsx";
 import FAQ from "./components/FAQ.jsx";
+import SettingsPage from "./components/Setting.jsx";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -67,7 +68,7 @@ const App = () => {
           />
           <Route path="/delivery-address" element={<DeliveryAddress />} />
           <Route
-            path="/kurti"
+            path="/kurtis"
             element={<ResponsiveeGrid category={"Kurti"} />}
           />
           <Route
@@ -79,8 +80,8 @@ const App = () => {
             element={<ResponsiveeGrid category={"Unstitched Suits"} />}
           />
           <Route
-            path="/Lehengas"
-            element={<ResponsiveeGrid category={"Lehengas"} />}
+            path="/lehengas"
+            element={<ResponsiveeGrid category={"Lehnga"} />}
           />
           <Route
             path="/Wedding-Collection"
@@ -99,6 +100,7 @@ const App = () => {
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route index element={<Navigate to="/home" replace />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/setting" element={<SettingsPage />} />
           <Route path="/faq" element={<FAQ />} />
         </Route>
       </Routes>

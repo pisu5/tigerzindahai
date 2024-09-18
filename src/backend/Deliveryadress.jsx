@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth"; // Import Firebase Auth
 
 const DeliveryAddress = ({ onProceed }) => {
   const [formData, setFormData] = useState({
@@ -16,19 +17,42 @@ const DeliveryAddress = ({ onProceed }) => {
     altPhone: "",
     landmark: "",
     paymentMethod: "Prepaid", // Default to Prepaid
-    quantity: 1, // Ensure this value is provided correctly
-    price: 0, // Ensure this value is provided correctly
-    hsn: "", // Ensure this value is provided correctly
-    length: 0.5, // Ensure it meets the minimum requirement
-    breadth: 0.5, // Ensure it meets the minimum requirement
-    height: 0.5, // Ensure it meets the minimum requirement
-    weight: 0.1, // Ensure it meets the minimum requirement
+    quantity: 1,
+    price: 0,
+    hsn: "",
+    length: 0.5,
+    breadth: 0.5,
+    height: 0.5,
+    weight: 0.1,
   });
 
   const [errors, setErrors] = useState({}); // State to hold validation errors
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track user login status
+  const [loading, setLoading] = useState(true); // Track auth loading state
 
   const location = useLocation();
+  const navigate = useNavigate(); // To redirect to login page
   const { orderData } = location.state || {};
+
+  useEffect(() => {
+    const auth = getAuth(); // Get Firebase Auth instance
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true); // Set auth status to true if user is logged in
+        setFormData((prev) => ({ ...prev, email: user.email })); // Pre-fill email from auth
+      } else {
+        setIsAuthenticated(false);
+        navigate("/login"); // Redirect to login if not authenticated
+      }
+      setLoading(false); // Set loading to false once check is complete
+    });
+
+    return () => unsubscribe(); // Cleanup subscription
+  }, [navigate]);
+
+  if (loading) {
+    return <p>Loading...</p>; // Show a loading state while checking auth
+  }
 
   if (!orderData) {
     return <p>No order data found. Please go back and try again.</p>;
@@ -49,7 +73,6 @@ const DeliveryAddress = ({ onProceed }) => {
     if (!formData.phone || !/^\d{10}$/.test(formData.phone))
       newErrors.phone = "Valid Phone Number is required";
 
-    // Validate dimensions and weight
     if (formData.length < 0.5)
       newErrors.length = "Length must be at least 0.5.";
     if (formData.breadth < 0.5)
@@ -74,16 +97,16 @@ const DeliveryAddress = ({ onProceed }) => {
 
     const orderItems = [
       {
-        name:orderData.name, // Example; update based on your form data
-        sku: "chakra123", // Example; update based on your form data
-        units: formData.quantity, // Ensure this value is set correctly
-        selling_price: orderData.price, // Ensure this value is set correctly
-        hsn: formData.hsn, // Example; update based on your form data
+        name: orderData.name,
+        sku: "chakra123",
+        units: formData.quantity,
+        selling_price: orderData.price,
+        hsn: formData.hsn,
       },
     ];
 
     const orderPayload = {
-      order_id: "ORDER123456", // Or generate this dynamically if needed
+      order_id: "ORDER123456",
       order_date: new Date().toISOString(),
       pickup_location: "Primary",
       billing_customer_name: formData.name,
