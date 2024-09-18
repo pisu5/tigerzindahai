@@ -89,8 +89,10 @@ const ResponsiveGrid = ({ category }) => {
                 onChange={(e) => setFilter(e.target.value)}
               >
                 <option value="">All Categories</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Clothing">Clothing</option>
+                <option value="Sarees">Electronics</option>
+                <option value="suits">Clothing</option>
+                <option value="kurties">Electronics</option>
+                <option value="bridal lehnga">Clothing</option>
               </select>
             </div>
 

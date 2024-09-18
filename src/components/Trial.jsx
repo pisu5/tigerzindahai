@@ -6,10 +6,12 @@ import { getDatabase, ref, get } from "firebase/database";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/anejamalllogo.jpg";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const database = getDatabase(firebaseApp); // Use Firebase app instance
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -43,6 +45,12 @@ const Header = () => {
     fetchText();
   }, []);
 
+ 
+
+  const handleIconClick = () => {
+    navigate("/profile");
+  };
+
   return (
     <header className="w-full">
       {/* Highlighted Text Container */}
@@ -63,11 +71,7 @@ const Header = () => {
 
         {/* Logo */}
         <div className="flex-grow text-center md:flex md:justify-center ll">
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-8 md:h-20 lg:h-20 mx-auto"
-          />
+          <img src={logo} alt="Logo" className="h-8 md:h-20 lg:h-20 mx-auto" />
         </div>
 
         {/* Icons */}
@@ -101,6 +105,7 @@ const Header = () => {
             ></circle>
           </svg>
           <svg
+            onClick={handleIconClick}
             focusable="false"
             className="icon icon--header-customer text-gray-600 cursor-pointer h-8 md:h-20 lg:h-6"
             viewBox="0 0 18 17"
@@ -210,7 +215,7 @@ const Header = () => {
           <Link to="/gowns">Gowns</Link>
           <Link to="/loginpage">Login</Link>
           <Link to="/wedding-collection">Wedding Collection</Link>
-          <Link to="/returns-orders">Wedding Collection</Link>
+
           <Link to="/bestsellers">Bestsellers</Link>
         </ul>
       </nav>

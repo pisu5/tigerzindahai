@@ -74,10 +74,10 @@ const DeliveryAddress = ({ onProceed }) => {
 
     const orderItems = [
       {
-        name: "Kunai", // Example; update based on your form data
+        name:orderData.name, // Example; update based on your form data
         sku: "chakra123", // Example; update based on your form data
         units: formData.quantity, // Ensure this value is set correctly
-        selling_price: formData.price, // Ensure this value is set correctly
+        selling_price: orderData.price, // Ensure this value is set correctly
         hsn: formData.hsn, // Example; update based on your form data
       },
     ];

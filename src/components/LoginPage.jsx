@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import firebaseApp from "../firebaseConfig"; // Import Firebase config
 import { getDatabase, ref, set } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import logo from "../assets/anejamalllogo.jpg";
 
 const LoginPage = () => {
   const database = getDatabase(firebaseApp); // Use Firebase app instance
@@ -30,7 +31,7 @@ const LoginPage = () => {
         });
 
         console.log('User signed up and saved in the database');
-        navigate('/dashboard'); // Redirect to dashboard or another page
+        navigate('/home'); // Redirect to dashboard or another page
       } catch (error) {
         console.error('Error signing up:', error.message);
         alert(error.message); // Show error to user
@@ -40,7 +41,7 @@ const LoginPage = () => {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         console.log('User logged in');
-        navigate('/dashboard'); // Redirect to dashboard or another page
+        navigate('/home'); // Redirect to dashboard or another page
       } catch (error) {
         console.error('Error logging in:', error.message);
         alert(error.message); // Show error to user
@@ -53,7 +54,7 @@ const LoginPage = () => {
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
         <div className="flex justify-center mb-6">
           <img
-            src="path/to/your/logo.png" // Replace with your logo path
+            src={logo} // Replace with your logo path
             alt="Aneja Mall Logo"
             className="h-12"
           />

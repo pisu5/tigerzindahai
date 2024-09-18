@@ -16,6 +16,8 @@ import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
 import RefundPolicy from "./components/RefundPolicy.jsx";
 import TermsOfService from "./components/TermOfSerVices.jsx";
 import ReturnOrder from "./components/ReturnsOrders.jsx";
+import Profile from "./components/Profile.jsx";
+import FAQ from "./components/FAQ.jsx";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -96,6 +98,8 @@ const App = () => {
           <Route path="/returns-orders" element={<ReturnOrder />}></Route>
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route index element={<Navigate to="/home" replace />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/faq" element={<FAQ />} />
         </Route>
       </Routes>
     </BrowserRouter>
